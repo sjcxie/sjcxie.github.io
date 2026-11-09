@@ -77,7 +77,7 @@
 
       /* hero */
       .hero { position: relative; overflow: hidden; }
-      .hero img { display: block; width: 100%; height: 256px; object-fit: cover; object-position: center; }
+      .hero img { display: block; width: 100%; height: 236px; object-fit: cover; object-position: center; }
       @media (min-width: 640px) { .hero img { height: 320px; } }
       .hero-shade {
         position: absolute; inset: 0;
@@ -179,7 +179,7 @@
         border-top: 1px solid var(--border); background: var(--bg);
         padding-bottom: env(safe-area-inset-bottom);
       }
-      nav.bottom .wrap { display: grid; grid-template-columns: repeat(4, 1fr); }
+      nav.bottom .wrap { display: grid; grid-template-columns: repeat(5, 1fr); }
       .nav-btn {
         display: flex; flex-direction: column; align-items: center; gap: 2px;
         padding: 10px 0; font-size: 12px; color: var(--faint); min-height: 56px;
@@ -187,6 +187,31 @@
       .nav-btn .glyph { font-family: var(--serif); font-size: 18px; line-height: 1; }
       .nav-btn.active { color: var(--accent-soft); }
       .nav-btn.active .lbl { font-weight: 500; }
+
+      /* 正念模块 */
+      .breath-stage { display:flex; flex-direction:column; align-items:center; padding: 20px 0 8px; }
+      .breath-circle {
+        width: 168px; height: 168px; border-radius: 999px;
+        background: radial-gradient(circle at 50% 42%, #5a4a86 0%, #4a3a6e 58%, #3a2d58 100%);
+        border: 1px solid var(--accent);
+        display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px;
+        transition: transform 1s linear;
+        will-change: transform;
+      }
+      .breath-phase { font-family: var(--serif); font-size: 22px; font-weight:600; }
+      .breath-count { font-size: 13px; color: var(--accent-soft); min-height: 18px; }
+      .breath-progress { font-size: 13px; color: var(--dim); margin-top: 14px; min-height: 20px; text-align:center; }
+      .talk-daily { background: var(--surface-2); border-radius: var(--radius); padding: 20px 16px; text-align:center; }
+      .talk-daily .talk-text { font-family: var(--serif); font-size: 20px; font-weight:600; line-height:1.6; margin: 8px 0 0; }
+      .guide-card { background: var(--surface); border-radius: var(--radius); padding: 16px; margin-top: 12px; }
+      .guide-step { font-size: 15px; line-height: 1.8; background: var(--bg); border-radius: var(--radius); padding: 14px; margin-top: 12px; min-height: 76px; }
+      .talk-item { border-bottom: 1px solid var(--border); padding: 12px 0; }
+      .talk-item:last-child { border-bottom: none; }
+      .talk-item .t-text { font-family: var(--serif); font-size: 16px; line-height: 1.6; margin: 0; }
+      .reframe-pair { background: var(--surface); border-radius: var(--radius); padding: 14px 16px; margin-top: 12px; }
+      .reframe-pair .harsh { font-size: 14px; color: var(--faint); line-height:1.7; margin:0; }
+      .reframe-pair .kind { font-family: var(--serif); font-size: 16px; line-height:1.7; margin: 6px 0 0; color: var(--text); }
+      .sec-sub { font-size: 14px; font-weight: 500; color: var(--accent-soft); margin: 0 0 4px; }
 
       [hidden] { display: none !important; }
       @media (prefers-reduced-motion: reduce) {
@@ -248,7 +273,66 @@
         { id: "fx-xuwang", text: "凡所有相，皆是虚妄。若见诸相非相，则见如来", source: "《金刚经》", kind: "经文" }
       ];
 
-      var PRACTICE_KINDS = ["打坐", "听经", "诵经", "持咒", "读经"];
+      var SELF_TALK = [
+        { id: "st-01", text: "我可以慢一点，一步一步来，不必一次做完所有事。" },
+        { id: "st-02", text: "今天做不到的部分，不代表我这个人不行，只是今天还没到。" },
+        { id: "st-03", text: "我允许自己累，休息不是偷懒，是照顾自己。" },
+        { id: "st-04", text: "犯错是学习的一部分，我可以从这里继续，而不是从头否定自己。" },
+        { id: "st-05", text: "我的感受是真实的，我可以先听听自己在说什么。" },
+        { id: "st-06", text: "我不必和别人比，我有自己的节奏和要走的路。" },
+        { id: "st-07", text: "事情很难的时候，我可以先做最小的那一步。" },
+        { id: "st-08", text: "我曾经熬过很难的日子，那些经验还在我身上。" },
+        { id: "st-09", text: "我可以一边害怕，一边往前走，这两件事不矛盾。" },
+        { id: "st-10", text: "别人的一句话，不能定义我是谁。" },
+        { id: "st-11", text: "我值得被好好对待，包括被我自己好好对待。" },
+        { id: "st-12", text: "现在这一刻，我是安全的，可以先把呼吸放慢。" },
+        { id: "st-13", text: "我不需要完美，够好、真实，就已经很好。" },
+        { id: "st-14", text: "求助不是软弱，是给自己多一个支点。" },
+        { id: "st-15", text: "我的价值不由今天的产出决定。" },
+        { id: "st-16", text: "难过的情绪会过去，就像天气一样，我不用急着赶走它。" },
+        { id: "st-17", text: "我可以对过去的自己温柔一点，她当时已经尽力了。" },
+        { id: "st-18", text: "小小的进步也是进步，我看见自己走过的每一步。" },
+        { id: "st-19", text: "我可以说不，守住自己的时间和力气。" },
+        { id: "st-20", text: "今天不管过得怎么样，我都陪着自己，不离开。" },
+        { id: "st-21", text: "我正在学习的东西，需要时间，我愿意给自己时间。" },
+        { id: "st-22", text: "把心放回当下：眼前这一件事，我可以好好的做。" }
+      ];
+
+      var BREATH_RHYTHMS = {
+        "446": { label: "四四六", desc: "吸气 4 · 屏息 4 · 呼气 6，呼气拉长，心慢慢沉下来", phases: [ { name: "吸气", sec: 4, from: 1, to: 1.32 }, { name: "屏息", sec: 4, from: 1.32, to: 1.32 }, { name: "呼气", sec: 6, from: 1.32, to: 1 } ] },
+        "478": { label: "4-7-8", desc: "吸气 4 · 屏息 7 · 呼气 8，适合睡前或心烦时", phases: [ { name: "吸气", sec: 4, from: 1, to: 1.32 }, { name: "屏息", sec: 7, from: 1.32, to: 1.32 }, { name: "呼气", sec: 8, from: 1.32, to: 1 } ] },
+        "box": { label: "盒式呼吸", desc: "吸气 4 · 屏息 4 · 呼气 4 · 屏息 4，像画一个方盒子，稳而均匀", phases: [ { name: "吸气", sec: 4, from: 1, to: 1.32 }, { name: "屏息", sec: 4, from: 1.32, to: 1.32 }, { name: "呼气", sec: 4, from: 1.32, to: 1 }, { name: "屏息", sec: 4, from: 1, to: 1 } ] }
+      };
+
+      var GUIDES = [
+        { id: "senses", title: "五感练习 · 5-4-3-2-1", intro: "心飘走的时候，用五种感官把自己带回此刻所在的地方。", steps: [
+          "看见：环顾四周，说出 5 样你现在看得见的东西，慢慢看清它们的颜色和形状。",
+          "听见：静下来，找出 4 种此刻的声音——远的、近的，都算。",
+          "触到：留意 3 处身体和外界接触的感觉，比如脚踩着地面、衣服贴着皮肤、风拂过脸。",
+          "闻到：找 2 种气味，深深吸一口气，茶香、空气的味道，都可以。",
+          "尝到：最后，留意口中的 1 种味道，或喝一口水，感受它流过喉咙。",
+          "收尾：再做一次深呼吸。此刻你在这里，这就够了。"
+        ] },
+        { id: "bodyscan", title: "身体扫描", intro: "像一束温和的光，从头到脚慢慢走过身体，不评判，只是觉察。", steps: [
+          "坐好或躺好，闭上眼睛，先自然呼吸三次，把注意力放到身体上。",
+          "头顶与脸：额头、眼睛、脸颊、下巴，有紧绷的地方，随着呼气松开。",
+          "肩颈与手臂：肩膀常常不自觉耸起——觉察到，就让它沉下来。",
+          "胸口与腹部：感受呼吸起伏，心跳也好，空空的也好，如实觉察。",
+          "背部与腰：贴着椅背或床面的地方，感受那份支撑。",
+          "双腿与双脚：从大腿到脚趾，哪里酸、哪里麻，都只是感觉，不用改变它。",
+          "收尾：觉察整个身体作为一个整体，呼吸三次，慢慢睁开眼睛。"
+        ] },
+        { id: "breathwatch", title: "观息", intro: "不控制呼吸，只是看着它来、看着它去，像看河水流过。", steps: [
+          "找一个舒服的姿势坐好，背挺直但不僵硬，手自然放在腿上。",
+          "把注意力轻轻放在鼻孔下方，感受气息进出的凉与暖。",
+          "不用数、不用调整，呼吸深也好浅也好，都只是看着。",
+          "念头来了——这是正常的。知道它来了，再把注意力轻轻带回呼吸。",
+          "走神一百次，就温柔地回来一百次，这本身就是练习。",
+          "收尾：感受一下此刻的心，比刚才安静了，还是依旧——都可以，练习已完成。"
+        ] }
+      ];
+
+      var PRACTICE_KINDS = ["打坐", "听经", "诵经", "持咒", "读经", "正念"];
       var WEEKDAYS = ["日", "一", "二", "三", "四", "五", "六"];
 
       /* ============ 日期工具（访问者本地日历日） ============ */
@@ -306,7 +390,7 @@
       /* ============ 本地保存（只存在访问者自己的浏览器里） ============ */
 
       var STORE_KEY = "jing-shen-shi-jie-gongkai-v1";
-      var state = { logs: [], quotes: [], doneLectureIds: [] };
+      var state = { logs: [], quotes: [], doneLectureIds: [], talkFavIds: [], myTalks: [], reframes: [] };
 
       function loadState() {
         try {
@@ -316,6 +400,9 @@
           if (parsed && Array.isArray(parsed.logs)) state.logs = parsed.logs;
           if (parsed && Array.isArray(parsed.quotes)) state.quotes = parsed.quotes;
           if (parsed && Array.isArray(parsed.doneLectureIds)) state.doneLectureIds = parsed.doneLectureIds;
+          if (parsed && Array.isArray(parsed.talkFavIds)) state.talkFavIds = parsed.talkFavIds;
+          if (parsed && Array.isArray(parsed.myTalks)) state.myTalks = parsed.myTalks;
+          if (parsed && Array.isArray(parsed.reframes)) state.reframes = parsed.reframes;
         } catch (e) { /* 存储不可用时静默降级为内存状态 */ }
       }
       function saveState() {
@@ -337,13 +424,30 @@
       var editingQuoteId = null;
       var formError = "";
       var fayuError = "";
+      var talkError = "";
+      var reframeError = "";
+      var openGuideId = null;
+      var guideStep = 0;
+      /* 呼吸练习运行状态（不持久化） */
+      var breathRhythm = "446";
+      var breathMinutes = 3;
+      var breathRunning = false;
+      var breathFinished = false;
+      var breathLogged = false;
+      var breathTimer = null;
+      var breathPhaseIdx = 0;
+      var breathPhaseElapsed = 0;
+      var breathTotalElapsed = 0;
 
       var TABS = [
         { id: "today", label: "今日", glyph: "今", path: "/today" },
         { id: "lectures", label: "听经", glyph: "经", path: "/lectures" },
         { id: "practice", label: "修行", glyph: "行", path: "/practice" },
-        { id: "fayu", label: "法语", glyph: "语", path: "/fayu" }
+        { id: "fayu", label: "法语", glyph: "语", path: "/fayu" },
+        { id: "mindful", label: "正念", glyph: "念", path: "/mindful" }
       ];
+
+      function dailyTalk(date) { return pick(SELF_TALK, dayIndex(date)); }
 
       function countView(path) {
         try {
@@ -416,6 +520,13 @@
           (doneCount > 0 ? " · 已听完 " + doneCount + " 讲" : "") + "</p>";
         html += "</div>";
         html += '<button type="button" class="btn-primary" data-action="goto" data-tab="practice">' + (todayLogs.length > 0 ? "再记一次" : "记今日修行") + "</button>";
+        html += "</div></section>";
+
+        var talk = dailyTalk(now);
+        html += '<section aria-label="今日对自己说的话" style="margin-top:16px;">';
+        html += '<div class="talk-daily" style="padding:14px 16px;"><p style="font-size:12px;letter-spacing:.3em;color:var(--dim);margin:0;">今日对自己说的话</p>';
+        html += '<p class="talk-text" style="font-size:18px;">' + esc(talk.text) + "</p>";
+        html += '<button type="button" class="btn-ghost" data-action="goto" data-tab="mindful" style="margin-top:10px;">去正念 · 呼吸一会儿 →</button>';
         html += "</div></section>";
 
         html += '<section aria-label="今日一课" style="margin-top:32px;">';
@@ -609,6 +720,177 @@
         return html;
       }
 
+      /* ============ 渲染：正念 · 对自己说的话 ============ */
+
+      function fmtClock(sec) {
+        sec = Math.max(0, Math.round(sec));
+        return Math.floor(sec / 60) + ":" + String(sec % 60).padStart(2, "0");
+      }
+
+      function renderMindful(todayStr) {
+        var talk = dailyTalk(new Date());
+        var rhythm = BREATH_RHYTHMS[breathRhythm];
+        var totalSec = breathMinutes * 60;
+        var html = '<div class="px" style="padding-top:24px;">';
+        html += '<div class="sec-head"><h2 class="sec-title">正念 · 对自己说的话</h2></div>';
+        html += '<p class="dim" style="margin:-4px 0 0;">把心带回当下，也把话说得对自己温柔一点。这里写下的话只存在你自己的浏览器里。</p>';
+
+        /* 今日对自己说的话 */
+        html += '<section aria-label="今日对自己说的话" style="margin-top:20px;"><div class="talk-daily">';
+        html += '<p style="font-size:12px;letter-spacing:.3em;color:var(--dim);margin:0;">今日对自己说的话</p>';
+        html += '<p class="talk-text">' + esc(talk.text) + "</p>";
+        var talkFav = state.talkFavIds.indexOf(talk.id) !== -1;
+        html += '<button type="button" class="btn-ghost" data-action="fav-talk" data-id="' + talk.id + '" style="margin-top:12px;">' + (talkFav ? "♥ 已收藏" : "♡ 收藏这句") + "</button>";
+        html += "</div></section>";
+
+        /* 正念呼吸 */
+        html += '<section class="card" aria-label="正念呼吸" style="margin-top:24px;">';
+        html += '<h3 class="sec-sub" style="font-size:16px;color:var(--text);font-family:var(--serif);">正念呼吸</h3>';
+        html += '<p class="dim" style="margin:0;">' + esc(rhythm.desc) + "</p>";
+        html += '<div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;" role="group" aria-label="呼吸节奏">';
+        Object.keys(BREATH_RHYTHMS).forEach(function (key) {
+          html += '<button type="button" class="chip small' + (breathRhythm === key ? " on" : "") + '" data-action="breath-rhythm" data-id="' + key + '" aria-pressed="' + (breathRhythm === key) + '">' + BREATH_RHYTHMS[key].label + "</button>";
+        });
+        html += "</div>";
+        html += '<div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;" role="group" aria-label="练习时长">';
+        [1, 3, 5].forEach(function (m) {
+          html += '<button type="button" class="chip small' + (breathMinutes === m ? " on" : "") + '" data-action="breath-minutes" data-min="' + m + '" aria-pressed="' + (breathMinutes === m) + '">' + m + " 分钟</button>";
+        });
+        html += "</div>";
+        html += '<div class="breath-stage"><div class="breath-circle" id="breath-circle"><span class="breath-phase" id="breath-phase">' + (breathFinished ? "完成" : breathRunning ? esc(rhythm.phases[breathPhaseIdx].name) : "准备") + '</span><span class="breath-count" id="breath-count">' + (breathRunning ? Math.ceil(rhythm.phases[breathPhaseIdx].sec - breathPhaseElapsed) + " 秒" : breathFinished ? "辛苦了" : "跟着圆圈呼吸") + "</span></div>";
+        html += '<p class="breath-progress" id="breath-progress">' + (breathFinished ? "这一轮呼吸完成了。" : "已练习 " + fmtClock(breathTotalElapsed) + " / " + fmtClock(totalSec)) + "</p></div>";
+        html += '<div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;">';
+        if (breathFinished) {
+          if (!breathLogged) html += '<button type="button" class="btn-primary" data-action="breath-log">记入修行记录（正念 ' + breathMinutes + ' 分钟）</button>';
+          else html += '<span class="dim" style="align-self:center;">已记入修行记录 ✓</span>';
+          html += '<button type="button" class="btn-ghost" data-action="breath-reset" style="align-self:center;">再来一轮</button>';
+        } else if (breathRunning) {
+          html += '<button type="button" class="btn-primary" data-action="breath-pause">暂停</button>';
+          html += '<button type="button" class="btn-ghost" data-action="breath-reset" style="align-self:center;">结束重来</button>';
+        } else {
+          html += '<button type="button" class="btn-primary" data-action="breath-start">' + (breathTotalElapsed > 0 ? "继续" : "开始呼吸") + "</button>";
+          if (breathTotalElapsed > 0) html += '<button type="button" class="btn-ghost" data-action="breath-reset" style="align-self:center;">结束重来</button>';
+        }
+        html += "</div></section>";
+
+        /* 正念小练习 */
+        html += '<section aria-label="正念小练习" style="margin-top:28px;">';
+        html += '<h3 class="sec-sub" style="font-size:16px;color:var(--text);font-family:var(--serif);">正念小练习</h3>';
+        html += '<p class="dim" style="margin:0;">不用盘腿，不用清空脑袋——跟着一步步做，就是正念。</p>';
+        GUIDES.forEach(function (g) {
+          var open = openGuideId === g.id;
+          html += '<div class="guide-card"><div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;"><h4 style="font-family:var(--serif);font-size:16px;margin:0;">' + esc(g.title) + '</h4><button type="button" data-action="guide-toggle" data-id="' + g.id + '" style="font-size:14px;color:var(--accent-soft);flex-shrink:0;">' + (open ? "收起" : "开始") + "</button></div>";
+          html += '<p class="dim" style="margin:6px 0 0;">' + esc(g.intro) + "</p>";
+          if (open) {
+            var step = Math.min(guideStep, g.steps.length - 1);
+            html += '<div class="guide-step">' + esc(g.steps[step]) + "</div>";
+            html += '<div style="display:flex;align-items:center;justify-content:space-between;margin-top:10px;"><span style="font-size:13px;color:var(--faint);">第 ' + (step + 1) + " / " + g.steps.length + ' 步</span><div style="display:flex;gap:8px;">';
+            html += '<button type="button" class="btn-ghost" data-action="guide-prev"' + (step === 0 ? " disabled" : "") + ">上一步</button>";
+            if (step < g.steps.length - 1) html += '<button type="button" class="btn-ghost" data-action="guide-next">下一步</button>';
+            else html += '<button type="button" class="btn-ghost" data-action="guide-toggle" data-id="' + g.id + '">完成 ✓</button>';
+            html += "</div></div>";
+          }
+          html += "</div>";
+        });
+        html += "</section>";
+
+        /* 正向自我对话 · 语句库 */
+        html += '<section aria-label="对自己说的话" style="margin-top:28px;">';
+        html += '<h3 class="sec-sub" style="font-size:16px;color:var(--text);font-family:var(--serif);">对自己说的话</h3>';
+        html += '<p class="dim" style="margin:0 0 4px;">平和、可信、不夸张的话——心烦时翻一翻，喜欢的收起来。</p><div>';
+        SELF_TALK.forEach(function (s) {
+          var fav = state.talkFavIds.indexOf(s.id) !== -1;
+          html += '<div class="talk-item"><div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;"><p class="t-text">' + esc(s.text) + '</p><button type="button" data-action="fav-talk" data-id="' + s.id + '" aria-pressed="' + fav + '" style="font-size:18px;color:' + (fav ? "var(--amber)" : "var(--faint)") + ';flex-shrink:0;padding:2px 4px;" aria-label="' + (fav ? "取消收藏" : "收藏") + '">' + (fav ? "♥" : "♡") + "</button></div></div>";
+        });
+        html += "</div>";
+        if (state.talkFavIds.length > 0) html += '<p style="font-size:13px;color:var(--faint);margin:8px 0 0;">已收藏 ' + state.talkFavIds.length + " 句</p>";
+        html += "</section>";
+
+        /* 我写给自己的话 */
+        html += '<section class="card" aria-label="我写给自己的话" style="margin-top:24px;">';
+        html += '<h3 style="font-size:14px;font-weight:500;margin:0 0 12px;">我写给自己的话</h3>';
+        html += '<label class="sr-only" for="my-talk">写一句给自己的话</label><textarea id="my-talk" rows="2" placeholder="用你会对好朋友说话的语气，写一句给自己……"></textarea>';
+        if (talkError) html += '<p class="err" role="alert">' + esc(talkError) + "</p>";
+        html += '<button type="button" class="btn-primary" data-action="add-my-talk" style="margin-top:12px;min-height:40px;padding:8px 20px;">存下来</button>';
+        if (state.myTalks.length > 0) {
+          html += "<div style='margin-top:8px;'>";
+          state.myTalks.forEach(function (t) {
+            html += '<div class="talk-item"><div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;"><p class="t-text">' + esc(t.text) + '</p><button type="button" data-action="delete-my-talk" data-id="' + t.id + '" style="font-size:13px;color:var(--faint);flex-shrink:0;padding:4px 0;">删除</button></div></div>';
+          });
+          html += "</div>";
+        }
+        html += "</section>";
+
+        /* 换一句话说 */
+        html += '<section aria-label="换一句话说" style="margin-top:28px;">';
+        html += '<h3 class="sec-sub" style="font-size:16px;color:var(--text);font-family:var(--serif);">换一句话说</h3>';
+        html += '<p class="dim" style="margin:0;">脑子里那句苛责自己的话，先原样写下来，再试着用温和、真实的方式改写它。改写不是骗自己，是把话说全、说准。</p>';
+        html += '<div class="card" style="margin-top:12px;">';
+        html += '<label class="flabel" for="reframe-harsh">心里那句苛责的话</label><textarea id="reframe-harsh" rows="2" placeholder="如：我怎么什么都做不好……"></textarea>';
+        html += '<label class="flabel" for="reframe-kind" style="margin-top:12px;">换一句话说（温和版）</label><textarea id="reframe-kind" rows="2" placeholder="如：这件事我没做好，但我也有做好的事，我可以慢慢改。"></textarea>';
+        if (reframeError) html += '<p class="err" role="alert">' + esc(reframeError) + "</p>";
+        html += '<button type="button" class="btn-primary" data-action="add-reframe" style="margin-top:12px;min-height:40px;padding:8px 20px;">存下这一对</button>';
+        html += "</div>";
+        state.reframes.forEach(function (r) {
+          html += '<div class="reframe-pair"><p class="harsh">原来的话：' + esc(r.harsh) + '</p><p class="kind">' + esc(r.kind) + '</p><div style="text-align:right;"><button type="button" data-action="delete-reframe" data-id="' + r.id + '" style="font-size:13px;color:var(--faint);padding:4px 0;">删除</button></div></div>';
+        });
+        html += "</section></div>";
+        return html;
+      }
+
+      /* ============ 呼吸计时 ============ */
+
+      function breathTick() {
+        var rhythm = BREATH_RHYTHMS[breathRhythm];
+        var phase = rhythm.phases[breathPhaseIdx];
+        breathPhaseElapsed += 0.1;
+        breathTotalElapsed += 0.1;
+        var totalSec = breathMinutes * 60;
+        if (breathTotalElapsed >= totalSec) {
+          breathStop();
+          breathFinished = true; breathRunning = false;
+          breathPhaseElapsed = 0; breathTotalElapsed = totalSec;
+          render();
+          return;
+        }
+        if (breathPhaseElapsed >= phase.sec) {
+          breathPhaseElapsed = 0;
+          breathPhaseIdx = (breathPhaseIdx + 1) % rhythm.phases.length;
+          phase = rhythm.phases[breathPhaseIdx];
+        }
+        var circle = document.getElementById("breath-circle");
+        var phaseEl = document.getElementById("breath-phase");
+        var countEl = document.getElementById("breath-count");
+        var progEl = document.getElementById("breath-progress");
+        if (!circle) { breathStop(); return; }
+        var p = Math.min(1, breathPhaseElapsed / phase.sec);
+        var scale = phase.from + (phase.to - phase.from) * p;
+        circle.style.transitionDuration = "0.12s";
+        circle.style.transform = "scale(" + scale.toFixed(3) + ")";
+        if (phaseEl) phaseEl.textContent = phase.name;
+        if (countEl) countEl.textContent = Math.ceil(phase.sec - breathPhaseElapsed) + " 秒";
+        if (progEl) progEl.textContent = "已练习 " + fmtClock(breathTotalElapsed) + " / " + fmtClock(totalSec);
+      }
+      function breathStartTimer() {
+        breathStop();
+        breathTimer = setInterval(breathTick, 100);
+        var circle = document.getElementById("breath-circle");
+        var rhythm = BREATH_RHYTHMS[breathRhythm];
+        var phase = rhythm.phases[breathPhaseIdx];
+        if (circle) {
+          var p = Math.min(1, breathPhaseElapsed / phase.sec);
+          circle.style.transform = "scale(" + (phase.from + (phase.to - phase.from) * p).toFixed(3) + ")";
+        }
+      }
+      function breathStop() {
+        if (breathTimer) { clearInterval(breathTimer); breathTimer = null; }
+      }
+      function breathReset() {
+        breathStop();
+        breathRunning = false; breathFinished = false; breathLogged = false;
+        breathPhaseIdx = 0; breathPhaseElapsed = 0; breathTotalElapsed = 0;
+      }
+
       /* ============ 主渲染 ============ */
 
       var view = document.getElementById("view");
@@ -623,7 +905,9 @@
         if (tab === "today") view.innerHTML = renderToday(todayStr);
         else if (tab === "lectures") view.innerHTML = renderLectures();
         else if (tab === "practice") view.innerHTML = renderPractice(todayStr);
+        else if (tab === "mindful") view.innerHTML = renderMindful(todayStr);
         else view.innerHTML = renderFayu();
+        if (tab === "mindful" && breathRunning) breathStartTimer();
       }
 
       function saveFayuById(id) {
@@ -644,6 +928,7 @@
         var todayStr = toDateStr(new Date());
 
         if (action === "goto") {
+          if (breathRunning) { breathRunning = false; breathStop(); }
           tab = el.getAttribute("data-tab");
           editingLogId = null; editingQuoteId = null;
           render();
@@ -736,6 +1021,58 @@
           state.quotes.unshift({ id: uid(), text: text, source: source, reflection: "" });
           saveState(); render();
           window.scrollTo(0, 0);
+        } else if (action === "fav-talk") {
+          var tid = el.getAttribute("data-id");
+          var ti = state.talkFavIds.indexOf(tid);
+          if (ti === -1) state.talkFavIds.push(tid); else state.talkFavIds.splice(ti, 1);
+          saveState(); render();
+        } else if (action === "breath-rhythm") {
+          breathReset(); breathRhythm = el.getAttribute("data-id"); render();
+        } else if (action === "breath-minutes") {
+          breathReset(); breathMinutes = Number(el.getAttribute("data-min")); render();
+        } else if (action === "breath-start") {
+          breathRunning = true; breathFinished = false; render();
+        } else if (action === "breath-pause") {
+          breathRunning = false; breathStop(); render();
+        } else if (action === "breath-reset") {
+          breathReset(); render();
+        } else if (action === "breath-log") {
+          state.logs.unshift({ id: uid(), date: todayStr, kinds: ["正念"], minutes: breathMinutes, note: "正念呼吸 · " + BREATH_RHYTHMS[breathRhythm].label + " 节奏" });
+          state.logs.sort(function (a, b) { return a.date < b.date ? 1 : a.date > b.date ? -1 : 0; });
+          breathLogged = true;
+          saveState(); render();
+        } else if (action === "guide-toggle") {
+          var gid = el.getAttribute("data-id");
+          if (openGuideId === gid) { openGuideId = null; } else { openGuideId = gid; guideStep = 0; }
+          render();
+        } else if (action === "guide-next") {
+          guideStep += 1; render();
+        } else if (action === "guide-prev") {
+          if (guideStep > 0) guideStep -= 1; render();
+        } else if (action === "add-my-talk") {
+          var mta = document.getElementById("my-talk");
+          var mtext = mta ? mta.value.trim() : "";
+          if (!mtext) { talkError = "先写一句话给自己。"; render(); return; }
+          talkError = "";
+          state.myTalks.unshift({ id: uid(), text: mtext });
+          saveState(); render();
+        } else if (action === "delete-my-talk") {
+          var mdid = el.getAttribute("data-id");
+          state.myTalks = state.myTalks.filter(function (t) { return t.id !== mdid; });
+          saveState(); render();
+        } else if (action === "add-reframe") {
+          var rh = document.getElementById("reframe-harsh");
+          var rk = document.getElementById("reframe-kind");
+          var harsh = rh ? rh.value.trim() : "";
+          var kind = rk ? rk.value.trim() : "";
+          if (!harsh || !kind) { reframeError = "两栏都写上：原来的话，和换一种说法。"; render(); return; }
+          reframeError = "";
+          state.reframes.unshift({ id: uid(), harsh: harsh, kind: kind });
+          saveState(); render();
+        } else if (action === "delete-reframe") {
+          var rdid = el.getAttribute("data-id");
+          state.reframes = state.reframes.filter(function (r) { return r.id !== rdid; });
+          saveState(); render();
         }
       });
 

@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="color-scheme" content="dark" />
-    <meta name="description" content="修心界 —— 体佛法师讲经听经台、每日法语、修行记录与法语小筑。台北贤首禅苑体佛法师《金刚经》《圆觉经》讲经与开示。" />
+    <meta name="description" content="修心界 —— 体佛法师讲经听经台、每日法语、修行记录与法语小筑。台北贤首禅苑体佛法师《金刚经》《圆觉经》讲经与开示为主线，另设「同修共参」：梦参老和尚、圣严法师、南怀瑾、净界法师。" />
     <link rel="icon" href="data:," />
     <title>修心界</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -213,6 +213,12 @@
       .reframe-pair .kind { font-family: var(--serif); font-size: 16px; line-height:1.7; margin: 6px 0 0; color: var(--text); }
       .sec-sub { font-size: 14px; font-weight: 500; color: var(--accent-soft); margin: 0 0 4px; }
 
+      /* 同修共参 */
+      .teacher-block { margin-top: 28px; }
+      .teacher-name { font-family: var(--serif); font-size: 17px; font-weight: 600; margin: 0; }
+      .teacher-role { font-size: 12px; letter-spacing: .12em; color: var(--amber); margin: 4px 0 0; }
+      .teacher-intro { font-size: 14px; line-height: 1.7; color: var(--dim); margin: 6px 0 0; }
+
       [hidden] { display: none !important; }
       @media (prefers-reduced-motion: reduce) {
         * { transition: none !important; }
@@ -257,6 +263,32 @@
       ];
 
       var MORE_RESOURCES_URL = "http://www.jiyanwenhua.com/tifofashi.html";
+
+      /* ============ 同修共参：四位老师（链接均已逐条核实，资源取官方或稳定来源） ============ */
+
+      var TEACHERS = [
+        { id: "mengcan", name: "梦参老和尚", role: "贤首华严 · 与体佛法师同出一脉",
+          intro: "当代讲《华严经》最久的大德——2004 年起在五台山普寿寺开讲八十华严，历时五百座圆满。与体佛法师同属贤首（华严）一脉，是四位里血缘最近的一位。讲法特别实在：诵经不能只照文字诵，要想着经里说的道理。",
+          links: [
+            { id: "mc-fysp", title: "《华严经》全 39 品 · 《金刚经》（真如禅寺）· 《楞严经》", format: "视频 · 讲座汇总页", platform: "佛音网", action: "去听经", url: "https://www.fysp.org/6-7.htm", note: "佛音网的梦参老和尚专页：华严经系列按品齐全；《金刚经》是老和尚九十五岁应真如禅寺之请所讲，全八讲，带字幕；同页还有《楞严经》《法华经》《心经》等。" }
+          ] },
+        { id: "shengyen", name: "圣严法师", role: "禅宗 · 法鼓山创办人",
+          intro: "语言现代、系统清晰，补的是实修这一块：禅坐、默照、把禅用进日常生活。资源全部由法鼓山官方维护，是四位里渠道最稳的。",
+          links: [
+            { id: "sy-video", title: "圣严法师数位典藏 · 影音说法", format: "影音 · 官方典藏", platform: "法鼓山", action: "去听经", url: "https://www.shengyen.org/video.php", note: "法鼓山官方典藏站：《金刚经》生活、《心经》生活、「大法鼓」等系列，可在线收听收看。" },
+            { id: "sy-books", title: "《法鼓全集》2020 纪念版", format: "文字 · 全部著作在线版", platform: "法鼓文化", action: "去阅读", url: "https://ddc.shengyen.org/", note: "圣严法师全部著作的官方在线版，含《金刚经讲记》《圣严法师教禅坐》《正信的佛教》等，可全文检索、在线阅读。" }
+          ] },
+        { id: "nanhuaijin", name: "南怀瑾", role: "学者 · 融通儒释道",
+          intro: "华人世界影响最大的佛学讲述者之一，《金刚经说什么》是读得最多的现代金刚经讲记，语言最通俗，入门最友好。他是居士学者，讲法融儒释道，取向与前几位法师不同——放在这里作参照，各取所长。",
+          links: [
+            { id: "nhj-jingang", title: "《金刚经说什么》讲记全文", format: "文字 · 三十二品逐品讲解", platform: "劝学网", action: "去阅读", url: "https://www.quanxue.cn/ct_nanhuaijin/jingangindex.html", note: "南师讲《金刚经》的讲记全文：依三十二品逐品讲解，每品附一首偈颂。B 站另有 34 集听读版，搜「金刚经说什么」即可。" }
+          ] },
+        { id: "jingjie", name: "净界法师", role: "天台教观 · 专精《楞严经》",
+          intro: "四位里最专精的一位：《楞严经》134 集已圆满，教理密度高，适合想深入的人。体佛法师的开示里也常谈《楞严经》的真心与三摩钵提，这部经想学深，从这里进。",
+          links: [
+            { id: "jj-lengyan", title: "净界法师《楞严经》全集 · 134 集", format: "视频 · 全集", platform: "Bilibili", action: "去听经", url: "https://www.bilibili.com/video/av114953759492910/", note: "净律佛学院开讲的《楞严经》全集；合集开头另有「楞严经要义」上下两讲，可以先听要义、再入正文。" }
+          ] }
+      ];
 
       var FAYU_JINGXUAN = [
         { id: "fx-chijie", text: "持戒是为了自由", source: "体佛法师开示", sourceUrl: "https://www.bilibili.com/video/BV1J5T4zVEh2/", kind: "开示" },
@@ -478,6 +510,39 @@
         );
       }
 
+      function teacherLinkHTML(link, teacherName) {
+        return (
+          '<article class="lecture">' +
+            '<div class="lecture-head">' +
+              '<h4 class="lecture-title">' + esc(link.title) + "</h4>" +
+              '<span class="platform">' + esc(link.platform) + "</span>" +
+            "</div>" +
+            '<p class="lecture-format">' + esc(teacherName) + " · " + esc(link.format) + "</p>" +
+            '<p class="lecture-note">' + esc(link.note) + "</p>" +
+            '<div class="lecture-actions">' +
+              '<a class="listen-btn" href="' + esc(link.url) + '" target="_blank" rel="noreferrer" aria-label="打开' + esc(teacherName) + "：" + esc(link.title) + '">' + esc(link.action) + "</a>" +
+            "</div>" +
+          "</article>"
+        );
+      }
+
+      function renderTeachers() {
+        var html = '<section aria-label="同修共参" style="margin-top:40px;border-top:1px solid var(--border);padding-top:24px;">';
+        html += '<div class="sec-head"><h2 class="sec-title">同修共参</h2></div>';
+        html += '<p class="dim" style="margin:-4px 0 4px;">体佛法师仍是这里的主线。这一层只收四位与他方向相近的大德——同走见性、般若、华严一路，每位单独标注、互不相混；链接都挑官方或稳定的来源，逐条核实过。</p>';
+        TEACHERS.forEach(function (t) {
+          html += '<div class="teacher-block">';
+          html += '<h3 class="teacher-name">' + esc(t.name) + "</h3>";
+          html += '<p class="teacher-role">' + esc(t.role) + "</p>";
+          html += '<p class="teacher-intro">' + esc(t.intro) + "</p>";
+          html += "<div>";
+          t.links.forEach(function (l) { html += teacherLinkHTML(l, t.name); });
+          html += "</div></div>";
+        });
+        html += "</section>";
+        return html;
+      }
+
       /* ============ 渲染：今日 ============ */
 
       function renderToday(todayStr) {
@@ -534,7 +599,7 @@
         html += lectureCardHTML(lecture);
         html += "</section>";
 
-        html += '<p class="foot-note">体佛法师 · 台北贤首禅苑住持 · 贤首兼慈恩宗第四十二世法脉<br />你的打卡、收藏与体悟只保存在这台设备的浏览器里</p>';
+        html += '<p class="foot-note">体佛法师 · 台北贤首禅苑住持 · 贤首兼慈恩宗第四十二世法脉<br />同修共参：梦参老和尚 · 圣严法师 · 南怀瑾 · 净界法师（见听经台）<br />你的打卡、收藏与体悟只保存在这台设备的浏览器里</p>';
         html += "</div>";
         return html;
       }
@@ -545,7 +610,7 @@
         var visible = lectureTopic === "全部" ? LECTURES : LECTURES.filter(function (l) { return l.topic === lectureTopic; });
         var html = '<div class="px" style="padding-top:24px;">';
         html += '<div class="sec-head"><h2 class="sec-title">听经台</h2><span class="dim">已听完 ' + state.doneLectureIds.length + " / " + LECTURES.length + "</span></div>";
-        html += '<p class="dim" style="margin:-4px 0 16px;">体佛法师的讲经与开示，按经与主题整理。点开即去原站收听——法师常提醒：听经要听完整，不要断章取义。</p>';
+        html += '<p class="dim" style="margin:-4px 0 16px;">体佛法师的讲经与开示，按经与主题整理，是这里的主线。点开即去原站收听——法师常提醒：听经要听完整，不要断章取义。页面下方另有「同修共参」，收四位方向相近的大德。</p>';
         html += '<div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px;" role="group" aria-label="按主题筛选课程">';
         ["全部"].concat(LECTURE_TOPICS).forEach(function (t) {
           html += '<button type="button" class="chip small' + (lectureTopic === t ? " on" : "") + '" data-action="topic" data-topic="' + t + '" aria-pressed="' + (lectureTopic === t) + '">' + t + "</button>";
@@ -554,6 +619,7 @@
         visible.forEach(function (l) { html += lectureCardHTML(l); });
         html += "</div>";
         html += '<p style="text-align:center;font-size:14px;color:var(--dim);padding:24px 0;">更多讲经视频与讲义：<a href="' + MORE_RESOURCES_URL + '" target="_blank" rel="noreferrer" style="text-decoration:underline;text-decoration-color:var(--accent-deep);text-underline-offset:4px;">吉验文化 · 体佛法师专页</a></p>';
+        html += renderTeachers();
         html += "</div>";
         return html;
       }

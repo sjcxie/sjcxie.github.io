@@ -179,7 +179,7 @@
         border-top: 1px solid var(--border); background: var(--bg);
         padding-bottom: env(safe-area-inset-bottom);
       }
-      nav.bottom .wrap { display: grid; grid-template-columns: repeat(5, 1fr); }
+      nav.bottom .wrap { display: grid; grid-template-columns: repeat(4, 1fr); }
       .nav-btn {
         display: flex; flex-direction: column; align-items: center; gap: 2px;
         padding: 10px 0; font-size: 12px; color: var(--faint); min-height: 56px;
@@ -474,8 +474,7 @@
       var TABS = [
         { id: "today", label: "今日", glyph: "今", path: "/today" },
         { id: "lectures", label: "听经", glyph: "经", path: "/lectures" },
-        { id: "practice", label: "修行", glyph: "行", path: "/practice" },
-        { id: "fayu", label: "法语", glyph: "语", path: "/fayu" },
+        { id: "practice", label: "修行法语", glyph: "行", path: "/practice" },
         { id: "mindful", label: "正念", glyph: "念", path: "/mindful" }
       ];
 
@@ -786,6 +785,15 @@
         return html;
       }
 
+      /* ============ 渲染：修行法语（修行记录 + 法语小筑，合并为一页） ============ */
+
+      function renderPracticeFayu(todayStr) {
+        var html = renderPractice(todayStr);
+        html += '<div class="px"><div style="border-top:1px solid var(--border);margin-top:32px;"></div></div>';
+        html += renderFayu();
+        return html;
+      }
+
       /* ============ 渲染：正念 · 对自己说的话 ============ */
 
       function fmtClock(sec) {
@@ -970,9 +978,8 @@
 
         if (tab === "today") view.innerHTML = renderToday(todayStr);
         else if (tab === "lectures") view.innerHTML = renderLectures();
-        else if (tab === "practice") view.innerHTML = renderPractice(todayStr);
-        else if (tab === "mindful") view.innerHTML = renderMindful(todayStr);
-        else view.innerHTML = renderFayu();
+        else if (tab === "practice") view.innerHTML = renderPracticeFayu(todayStr);
+        else view.innerHTML = renderMindful(todayStr);
         if (tab === "mindful" && breathRunning) breathStartTimer();
       }
 
